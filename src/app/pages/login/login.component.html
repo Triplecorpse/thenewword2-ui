@@ -1,0 +1,22 @@
+<div style="height: 100vh; width: 100vw; display:flex; margin: auto">
+  <mat-card style="margin: auto">
+    <form [formGroup]="loginForm">
+      <div>
+        <mat-form-field>
+          <input type="text" matInput placeholder="Login" formControlName="login">
+        </mat-form-field>
+      </div>
+      <div>
+        <mat-form-field>
+          <input type="password" matInput placeholder="Password" formControlName="password">
+        </mat-form-field>
+      </div>
+      <div>
+        <mat-checkbox formControlName="saveSession">Save current session</mat-checkbox>
+      </div>
+      <div>
+        <button mat-flat-button color="primary">Login</button>
+      </div>
+    </form>
+  </mat-card>
+</div>
