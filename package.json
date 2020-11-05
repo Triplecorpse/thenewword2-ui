@@ -11,7 +11,8 @@
     "dev:ssr": "ng run thenewword2-ui:serve-ssr",
     "serve:ssr": "node dist/thenewword2-ui/server/main.js",
     "build:ssr": "ng build --prod && ng run thenewword2-ui:server:production",
-    "prerender": "ng run thenewword2-ui:prerender"
+    "prerender": "ng run thenewword2-ui:prerender",
+    "start:api": "cd ../thenewword2-api && npm run start-dev"
   },
   "private": true,
   "dependencies": {

@@ -1,14 +1,14 @@
 <div style="height: 100vh; width: 100vw; display:flex; margin: auto">
   <mat-card style="margin: auto">
-    <form [formGroup]="loginForm">
+    <form [formGroup]="loginForm" (ngSubmit)="submit()">
       <div>
         <mat-form-field>
-          <input type="text" matInput placeholder="Login" formControlName="login">
+          <input type="text" matInput placeholder="Login" formControlName="login" required>
         </mat-form-field>
       </div>
       <div>
         <mat-form-field>
-          <input type="password" matInput placeholder="Password" formControlName="password">
+          <input type="password" matInput placeholder="Password" formControlName="password" required>
         </mat-form-field>
       </div>
       <div>

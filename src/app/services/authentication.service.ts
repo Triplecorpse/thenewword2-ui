@@ -16,10 +16,14 @@ export class AuthenticationService {
   }
 
   authenticate(loginOrEmail: string, password: string): Observable<User> {
-    return this.httpClient.post<IUserDto>(
-      `${environment.api}/user/login`,
-      {body: {login: loginOrEmail, password: password}}
-    )
+    const formData = new FormData();
+
+    formData.append('login', loginOrEmail);
+    formData.append('password', password);
+
+    return this.httpClient.post<IUserDto>(`${environment.api}/user/login`, `login=${loginOrEmail}&password=${password}`, {
+      headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+    })
       .pipe(map(user => new User({login: user.login, email: user.email, token: user.token})));
   }
 

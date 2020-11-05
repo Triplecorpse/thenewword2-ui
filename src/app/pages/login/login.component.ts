@@ -1,5 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {FormControl, FormGroup} from "@angular/forms";
+import {HttpClient} from "@angular/common/http";
+import {AuthenticationService} from "../../services/authentication.service";
 
 @Component({
   selector: 'app-login',
@@ -13,10 +15,20 @@ export class LoginComponent implements OnInit {
     saveSession: new FormControl(false)
   });
 
-  constructor() {
+  constructor(private authenticationService: AuthenticationService) {
   }
 
   ngOnInit(): void {
   }
 
+  submit() {
+    if (this.loginForm.valid) {
+      const {login, password} = this.loginForm.value;
+
+      this.authenticationService.authenticate(login, password)
+        .subscribe(response => {
+          console.log(response);
+        });
+    }
+  }
 }
