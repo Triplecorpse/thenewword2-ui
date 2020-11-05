@@ -5,6 +5,8 @@ import {HttpClient} from "@angular/common/http";
 import {environment} from "../../environments/environment";
 import {IUserDto} from "../models/IUserDto";
 import {map, switchMapTo, tap} from "rxjs/operators";
+import {IUserLogin} from "../models/IUserLogin";
+import {IUserRegister} from "../models/IUserRegister";
 
 @Injectable({
   providedIn: 'root'
@@ -15,13 +17,13 @@ export class AuthenticationService {
   constructor(private httpClient: HttpClient) {
   }
 
-  authenticate(loginOrEmail: string, password: string): Observable<User> {
-    return this.httpClient.post<IUserDto>(`${environment.api}/user/login`, {login: loginOrEmail, password})
-      .pipe(map(user => new User({login: user.login, email: user.email, token: user.token})));
+  authenticate(loginForm: IUserLogin): Observable<User> {
+    return this.httpClient.post<IUserDto>(`${environment.api}/user/login`, loginForm)
+      .pipe(map(user => new User({login: user.login, email: user.email, token: user.token}, loginForm.saveSession)));
   }
 
-  register(login: string, password: string, email: string): Observable<void> {
-    return this.httpClient.post<IUserDto>(`${environment.api}/user/register`, {login, password, email})
+  register(registerForm: IUserRegister): Observable<void> {
+    return this.httpClient.post<IUserDto>(`${environment.api}/user/register`, registerForm)
       .pipe(switchMapTo(EMPTY));
   }
 

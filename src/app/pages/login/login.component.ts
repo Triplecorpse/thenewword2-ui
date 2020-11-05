@@ -23,9 +23,7 @@ export class LoginComponent implements OnInit {
 
   submit() {
     if (this.loginForm.valid) {
-      const {login, password} = this.loginForm.value;
-
-      this.authenticationService.authenticate(login, password)
+      this.authenticationService.authenticate(this.loginForm.value)
         .subscribe(response => {
           console.log(response);
         });
